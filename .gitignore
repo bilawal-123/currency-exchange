@@ -31,7 +31,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+# .env* Removed to allow env files to be committed these are not best practics but for now this is the only option
 
 # vercel
 .vercel
