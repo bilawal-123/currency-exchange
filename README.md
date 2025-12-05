@@ -2,6 +2,8 @@
 
 A modern currency exchange application built with [Next.js](https://nextjs.org) that provides real-time currency conversion and exchange rates.
 
+![alt text](https://muhammad-bilawal.tinytake.com/media/17e5775?filename=1764928114806_TinyTake05-12-2025-02-47-13_639005249115810156.png&sub_type=thumbnail_preview&type=attachment&width=722&height=471)
+
 ## Project Overview
 
 This project is a Next.js-based currency exchange application that allows users to:
@@ -71,3 +73,4 @@ npm run build
 npm start
 ```
 Feel free to reach me out in case of any question: bilawal.officials@gmail.com
+
