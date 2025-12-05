@@ -70,14 +70,4 @@ The `.env` file is committed to the repository as it's currently required for th
 npm run build
 npm start
 ```
-
-## Learn More
-
-To learn more about Next.js, check out these resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-## License
-
-This project is open source and available under the MIT License.
+Feel free to reach me out in case of any question: bilawal.officials@gmail.com
