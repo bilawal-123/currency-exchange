@@ -53,7 +53,7 @@ export function ExchangeWidget() {
             setLastUpdated(new Date());
         } catch (err) {
             console.error(err);
-            setError("Failed to load rates");
+            setError("Failed to load the rates");
         } finally {
             setRefreshing(false);
         }
@@ -70,7 +70,7 @@ export function ExchangeWidget() {
     }, [base]);
 
     const formatTime = (date: Date | null) => {
-        if (!date) return "—";
+        if (!date) return "_";
         return date.toLocaleDateString(undefined, {
             day: "2-digit",
             month: "short",
@@ -81,10 +81,10 @@ export function ExchangeWidget() {
     return (
         <>
             {/* Becuase of time shortage I didn't create a design system  */}
-            <section className="w-full max-w-xl bg-gray-100 border-2 border-green-700 shadow-xl">
-                <header className="flex items-center justify-between gap-4 bg-green-700 p-2">
+            <section className="w-full max-w-xl bg-gray-100 border-2 border-green-700">
+                <header className="flex items-center justify-between bg-green-700 p-2">
                     <div>
-                        <h1 className="text-sm font-semibold tracking-tight text-white">
+                        <h1 className="text-sm font-semibold text-white">
                             Exchange Rates{" "}
                             <small className="text-xs">
                                 <span className="font-medium text-slate-100">
@@ -99,7 +99,7 @@ export function ExchangeWidget() {
                         type="button"
                         onClick={handleRefreshClick}
                         disabled={refreshing}
-                        className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium bg-white hover:cursor-pointer hover:bg-slate-900 hover:text-white disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-150"
+                        className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium bg-white hover:cursor-pointer hover:bg-slate-900 hover:text-white disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-150"
                     >
                         {refreshing ? "Refreshing…" : "Refresh"}
                     </button>
@@ -109,7 +109,7 @@ export function ExchangeWidget() {
                     <div className="font-bold text-right">1 {base} =</div>
 
                     {error && (
-                        <p className="px-3 pb-2 text-red-600 font-medium">
+                        <p className="py-3 text-center text-red-600">
                             {error}
                         </p>
                     )}
@@ -126,21 +126,20 @@ export function ExchangeWidget() {
                                         alt={row.code}
                                         width={40}
                                         height={30}
-                                        className=""
                                     />
                                     <div className="flex flex-col leading-tight">
                                         <span className="font-semibold">{CURRENCY_NAMES[row.code]}</span>
                                     </div>
                                 </div>
 
-                                <div className="font-mono text-sm font-bold">
+                                <div className="font-mono font-bold">
                                     {row.rateToGBP.toFixed(3)}
                                 </div>
                             </li>
                         ))}
 
                         {rates.length === 0 && !error && (
-                            <li className="px-3 py-3 text-center text-green-700">
+                            <li className="py-3 text-center text-green-700">
                                 Loading the latest rates…
                             </li>
                         )}

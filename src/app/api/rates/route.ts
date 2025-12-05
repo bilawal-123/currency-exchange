@@ -1,11 +1,10 @@
-// app/api/rates/route.ts
 import { NextResponse } from "next/server";
 
 const CURRENCIES = ["USD", "EUR", "CHF", "AUD", "CAD"] as const;
 
 export async function GET() {
     try {
-        const apiKey = process.env.EXCHANGE_API_KEY; // set in .env.local
+        const apiKey = process.env.EXCHANGE_API_KEY;
 
         if (!apiKey) {
             return NextResponse.json(
@@ -14,10 +13,10 @@ export async function GET() {
             );
         }
 
-        // Provider base (free plan usually forces EUR)
+        // Provider base 
         const providerBase = "EUR";
 
-        // We want USD, EUR, CHF, AUD, CAD + GBP (for conversion)
+        // We need to get USD, EUR, CHF, AUD, CAD + GBP (for conversion)
         const symbols = [...CURRENCIES, "GBP"].join(",");
 
         const url = `https://api.exchangeratesapi.io/v1/latest?access_key=${apiKey}&base=${providerBase}&symbols=${symbols}`;
@@ -25,7 +24,7 @@ export async function GET() {
         const res = await fetch(url);
 
         if (!res.ok) {
-            const text = await res.text(); // inspect this in your terminal
+            const text = await res.text();
             console.error("External API error:", res.status, text);
             return NextResponse.json(
                 { error: "Failed to fetch rates from provider" },
@@ -34,7 +33,6 @@ export async function GET() {
         }
 
         const data = await res.json();
-        // expected shape: { base: "EUR", rates: { USD: ..., GBP: ..., ... } }
 
         if (!data.rates || !data.rates.GBP) {
             console.error("Provider response missing GBP rate:", data);
@@ -47,7 +45,6 @@ export async function GET() {
         const ratesFromEUR: Record<string, number> = data.rates;
         const eurToGBP = ratesFromEUR["GBP"];
 
-        // Convert: 1 GBP = (rate_EUR_to_X / rate_EUR_to_GBP)
         const gbpBasedRates: Record<string, number> = {};
 
         for (const code of CURRENCIES) {
@@ -57,7 +54,7 @@ export async function GET() {
             }
         }
 
-        // Respond as if base is GBP
+        // geting response based on GBP
         return NextResponse.json({
             base: "GBP",
             rates: gbpBasedRates,
